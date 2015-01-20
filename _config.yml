@@ -1,16 +1,17 @@
 # Site settings
-title:       Pixyll
-email:       your_email@example.com
-author:      John Otander
-description: "A simple, beautiful theme for Jekyll that emphasizes content rather than aesthetic fluff."
+title:       "If credit's what matters, I'll take credit."
+email:       nick@dischord.org
+author:      Nick Jones
+description: "If credit's what matters, I'll take credit."
 baseurl:     ""
-url:         "http://pixyll.com"
+url:         "http://dischord.org"
+paginate: 5
 
 # Google analytics
 google_analytics:
 
 # Optional features
-animated:           false
+animated:           true
 show_related_posts: false
 show_post_footers:  false
 
@@ -19,10 +20,10 @@ show_post_footers:  false
 disqus_shortname:
 
 # Social icons
-show_social_icons: false
-github_username:
+show_social_icons: true
+github_username: yankcrime
 stackoverflow_id:
-twitter_username:
+twitter_username: yankcrime
 google_plus_id:
 linkedin_username:
 bitcoin_url:
@@ -34,7 +35,6 @@ markdown:     redcarpet
 redcarpet:
   extensions: ['smart', 'tables', 'with_toc_data']
 permalink:    pretty
-paginate:     3
 sass:
   compressed: true
 gems:
