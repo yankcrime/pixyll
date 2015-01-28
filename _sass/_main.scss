@@ -14,7 +14,13 @@
 */
 
 body {
-  font-family: "Merriweather", "PT Serif", Georgia, "Times New Roman", serif;
+  font-family: "Open Sans", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.0;
+  color: #454441;
+  background-color: #fff;
+  margin: 0;
+  padding: 0;
 }
 
 html, body {
@@ -261,7 +267,8 @@ abbr {
 }
 
 pre, code {
-  font-family: Menlo, Monaco, "Courier New", monospace
+  font-family: Menlo, Monaco, "Courier New", monospace;
+  font-size: 0.80rem;
 }
 
 code {
@@ -307,10 +314,10 @@ h5,
 .h5,
 h6,
 .h6 {
-  font-family: "Lato", 'Helvetica Neue', Helvetica, sans-serif;
-  font-weight: 900;
-  line-height: 1.2;
-  margin: 1em 0 0.5em;
+  margin: 0 0 10px;
+  font-weight: 600;
+  line-height: 1.25;
+  text-rendering: optimizeLegibility;
 }
 
 .social-icons {
