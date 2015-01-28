@@ -1,0 +1,20 @@
+---
+layout: post
+title: "Pavey Ark"
+date: 2013-12-20 11:00
+comments: false
+categories: General Photography
+---
+
+I'm not a morning person by any stretch of the imagination.  I'm also not
+really one for hiking and walking about or the 'Great Outdoors' in general, but
+an adventure like this - a hike up to the top of Pavey Ark in the Lake District
+- might have just about changed that. 
+
+{% img http://farm4.staticflickr.com/3755/11423440876_06cf0b182d_b.jpg 1024 %}
+{% img http://farm6.staticflickr.com/5548/11423438914_7abeabff0e_b.jpg 1024 %}
+{% img http://farm8.staticflickr.com/7394/11423437164_1678bb9a4c_b.jpg 1024 %}
+{% img http://farm6.staticflickr.com/5471/11423439764_a47807cb4e_b.jpg 1024 %}
+{% img http://farm6.staticflickr.com/5512/11423437924_472203ebf1_b.jpg 1024 %}
+
+Related:  [It's my birthday tomorrow, just saying](http://www.amazon.co.uk/Nikon-AF-S-NIKKOR-14-24mm-2-8G/dp/B000VDCTCI).
