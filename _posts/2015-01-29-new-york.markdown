@@ -1,0 +1,16 @@
+---
+layout: post
+title: New York
+date: 2015-01-29 14:43
+published: true
+categories: General Photography Travel
+---
+
+Flickr album with a bunch more shots [here](https://www.flickr.com/photos/yankcrime/sets/72157650114559919/).
+
+{% img https://farm8.staticflickr.com/7454/16364859956_1d65ae96aa_h.jpg %}
+{% img https://farm8.staticflickr.com/7335/16204588049_66a463fdf0_h.jpg %}
+{% img https://farm8.staticflickr.com/7457/15770770503_b0ec803c53_h.jpg %}
+{% img https://farm8.staticflickr.com/7379/15773167934_d613d06674_h.jpg %}
+{% img https://farm8.staticflickr.com/7388/16203170898_e974f73e18_h.jpg %}
+{% img https://farm8.staticflickr.com/7387/16204931407_4d4e24656a_h.jpg %}
