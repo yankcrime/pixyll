@@ -3,7 +3,7 @@ title:       "If credit's what matters, I'll take credit."
 email:       nick@dischord.org
 author:      Nick Jones
 description: "If credit's what matters, I'll take credit."
-baseurl:     ""
+baseurl:     "/blog"
 url:         "http://dischord.org"
 paginate: 5
 
@@ -30,11 +30,14 @@ bitcoin_url:
 paypal_url:
 flattr_button:
 
+flickr:
+    api_key: 167cb17dcb886af997217243c8a6d1a3
+
 # Build settings
 markdown:     redcarpet
 redcarpet:
   extensions: ['smart', 'tables', 'with_toc_data']
-permalink:    pretty
+permalink: /:year/:month/:day/:title
 sass:
   compressed: true
 gems:
