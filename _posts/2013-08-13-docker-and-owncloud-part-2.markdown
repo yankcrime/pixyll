@@ -15,8 +15,6 @@ database backend (MySQL), for example. To get this to a point where we could
 happily run it on a daily basis and trust our data with it, we need to do a
 some more work.
 
-<!-- more -->
-
 Attempting to stay vaguely compliant with the Docker philosphy of being
 host-agnostic and easily transportable means that we also need to get a little
 bit clever about a few things. With this type of setup there are a few
@@ -28,44 +26,42 @@ database that we'll create.
 So with that in mind, let's start off by updating the Dockerfile - our starting
 point for creating a Docker image:
 
-```
-FROM ubuntu:12.04
-MAINTAINER Nick Jones "nick@dischord.org"
-RUN echo "deb http://archive.ubuntu.com/ubuntu precise main universe" >> /etc/apt/sources.list
-RUN apt-get -y update
- 
-RUN dpkg-divert --local --rename --add /sbin/initctl
-RUN ln -s /bin/true /sbin/initctl
- 
-RUN locale-gen en_US en_US.UTF-8
-RUN dpkg-reconfigure locales
- 
-RUN echo "mysql-server-5.5 mysql-server/root_password password root123" | debconf-set-selections
-RUN echo "mysql-server-5.5 mysql-server/root_password_again password root123" | debconf-set-selections
-RUN echo "mysql-server-5.5 mysql-server/root_password seen true" | debconf-set-selections
-RUN echo "mysql-server-5.5 mysql-server/root_password_again seen true" | debconf-set-selections
- 
-RUN apt-get install -y apache2 php5 php5-gd php-xml-parser php5-intl php5-sqlite mysql-server-5.5 smbclient curl libcurl3 php5-mysql php5-curl bzip2 wget vim openssl ssl-cert
- 
-RUN wget -q -O - http://download.owncloud.org/community/owncloud-5.0.10.tar.bz2 | tar jx -C /var/www/
- 
-RUN mkdir /etc/apache2/ssl
- 
-ADD resources/cfgmysql.sh /tmp/
-RUN chmod +x /tmp/cfgmysql.sh
-RUN /tmp/cfgmysql.sh
-RUN rm /tmp/cfgmysql.sh
- 
-ADD resources/001-owncloud.conf /etc/apache2/sites-available/
-ADD resources/start.sh /start.sh
- 
-RUN ln -s /etc/apache2/sites-available/001-owncloud.conf /etc/apache2/sites-enabled/
-RUN a2enmod rewrite ssl
- 
-EXPOSE :443
- 
-RUN chown -R www-data:www-data /var/www/owncloud
-```
+	FROM ubuntu:12.04
+	MAINTAINER Nick Jones "nick@dischord.org"
+	RUN echo "deb http://archive.ubuntu.com/ubuntu precise main universe" >> /etc/apt/sources.list
+	RUN apt-get -y update
+	 
+	RUN dpkg-divert --local --rename --add /sbin/initctl
+	RUN ln -s /bin/true /sbin/initctl
+	 
+	RUN locale-gen en_US en_US.UTF-8
+	RUN dpkg-reconfigure locales
+	 
+	RUN echo "mysql-server-5.5 mysql-server/root_password password root123" | debconf-set-selections
+	RUN echo "mysql-server-5.5 mysql-server/root_password_again password root123" | debconf-set-selections
+	RUN echo "mysql-server-5.5 mysql-server/root_password seen true" | debconf-set-selections
+	RUN echo "mysql-server-5.5 mysql-server/root_password_again seen true" | debconf-set-selections
+	 
+	RUN apt-get install -y apache2 php5 php5-gd php-xml-parser php5-intl php5-sqlite mysql-server-5.5 smbclient curl libcurl3 php5-mysql php5-curl bzip2 wget vim openssl ssl-cert
+	 
+	RUN wget -q -O - http://download.owncloud.org/community/owncloud-5.0.10.tar.bz2 | tar jx -C /var/www/
+	 
+	RUN mkdir /etc/apache2/ssl
+	 
+	ADD resources/cfgmysql.sh /tmp/
+	RUN chmod +x /tmp/cfgmysql.sh
+	RUN /tmp/cfgmysql.sh
+	RUN rm /tmp/cfgmysql.sh
+	 
+	ADD resources/001-owncloud.conf /etc/apache2/sites-available/
+	ADD resources/start.sh /start.sh
+	 
+	RUN ln -s /etc/apache2/sites-available/001-owncloud.conf /etc/apache2/sites-enabled/
+	RUN a2enmod rewrite ssl
+	 
+	EXPOSE :443
+	 
+	RUN chown -R www-data:www-data /var/www/owncloud
 
 There's a few key changes here that I should explain before we go much further:
 
@@ -80,12 +76,10 @@ So what do we do about our MySQL configuration and customisation for ownCloud?
 Well, line 20's resources/cfgmysql.sh script that we'll insert contains the
 following:
 
-```
-#!/bin/bash
-/usr/bin/mysqld_safe &
-sleep 5
-/usr/bin/mysql -u root -proot123 -e "CREATE DATABASE owncloud; GRANT ALL ON owncloud.* TO 'owncloud'@'localhost' IDENTIFIED BY 'owncloudsql';"
-```
+	#!/bin/bash
+	/usr/bin/mysqld_safe &
+	sleep 5
+	/usr/bin/mysql -u root -proot123 -e "CREATE DATABASE owncloud; GRANT ALL ON owncloud.* TO 'owncloud'@'localhost' IDENTIFIED BY 'owncloudsql';"
 
 Amend the -p option to use the MySQL root password specified above and you
 should also edit the 'owncloudsql' password to be something a little more
@@ -104,35 +98,33 @@ in here that we'll do the necessary post-container-creation customisation to
 get things like our SSL certificates for Apache correctly generated.  Let's
 take a closer look at this:
 
-```
-#!/bin/bash
-if [ ! -f /etc/apache2/ssl/server.key ]; then
-        mkdir -p /etc/apache2/ssl
-        KEY=/etc/apache2/ssl/server.key
-        DOMAIN=$(hostname)
-        export PASSPHRASE=$(head -c 128 /dev/urandom  | uuencode - | grep -v "^end" | tr "\n" "d")
-        SUBJ="
-C=UK
-ST=England
-O=Dischord
-localityName=Manchester
-commonName=$DOMAIN
-organizationalUnitName=
-emailAddress=nick@dischord.org
-"
-        openssl genrsa -des3 -out /etc/apache2/ssl/server.key -passout env:PASSPHRASE 2048
-        openssl req -new -batch -subj "$(echo -n "$SUBJ" | tr "\n" "/")" -key $KEY -out /tmp/$DOMAIN.csr -passin env:PASSPHRASE
-        cp $KEY $KEY.orig
-        openssl rsa -in $KEY.orig -out $KEY -passin env:PASSPHRASE
-        openssl x509 -req -days 365 -in /tmp/$DOMAIN.csr -signkey $KEY -out /etc/apache2/ssl/server.crt
-fi
-
-HOSTLINE=$(echo $(ip -f inet addr show eth0 | grep 'inet' | awk '{ print $2 }' | cut -d/ -f1) $(hostname) $(hostname -s))
-echo $HOSTLINE >> /etc/hosts
-
-/usr/bin/mysqld_safe &
-/usr/sbin/apache2ctl -D FOREGROUND
-```
+	#!/bin/bash
+	if [ ! -f /etc/apache2/ssl/server.key ]; then
+	        mkdir -p /etc/apache2/ssl
+	        KEY=/etc/apache2/ssl/server.key
+	        DOMAIN=$(hostname)
+	        export PASSPHRASE=$(head -c 128 /dev/urandom  | uuencode - | grep -v "^end" | tr "\n" "d")
+	        SUBJ="
+	C=UK
+	ST=England
+	O=Dischord
+	localityName=Manchester
+	commonName=$DOMAIN
+	organizationalUnitName=
+	emailAddress=nick@dischord.org
+	"
+	        openssl genrsa -des3 -out /etc/apache2/ssl/server.key -passout env:PASSPHRASE 2048
+	        openssl req -new -batch -subj "$(echo -n "$SUBJ" | tr "\n" "/")" -key $KEY -out /tmp/$DOMAIN.csr -passin env:PASSPHRASE
+	        cp $KEY $KEY.orig
+	        openssl rsa -in $KEY.orig -out $KEY -passin env:PASSPHRASE
+	        openssl x509 -req -days 365 -in /tmp/$DOMAIN.csr -signkey $KEY -out /etc/apache2/ssl/server.crt
+	fi
+	
+	HOSTLINE=$(echo $(ip -f inet addr show eth0 | grep 'inet' | awk '{ print $2 }' | cut -d/ -f1) $(hostname) $(hostname -s))
+	echo $HOSTLINE >> /etc/hosts
+	
+	/usr/bin/mysqld_safe &
+	/usr/sbin/apache2ctl -D FOREGROUND
 
 First off we do a quick test to see if this is being run for the first time in
 a new container from an image, and if so generates our SSL keys accordingly.
@@ -155,27 +147,25 @@ guide.
 Finally, the other file we will include from our resources/ folder is the
 Apache configuration containing the necessary directives to enable SSL:
 
-```
-<Directory /var/www/owncloud>
-        Options Indexes FollowSymLinks MultiViews
-        AllowOverride All
-        Order allow,deny
-        allow from all
-</Directory>
-
-<VirtualHost *:443>
-        DocumentRoot /var/www/owncloud
-        <Directory /var/www/owncloud>
-                Options Indexes FollowSymLinks MultiViews
-                AllowOverride All
-                Order allow,deny
-                allow from all
-        </Directory>
-        SSLEngine on
-        SSLCertificateFile /etc/apache2/ssl/apache.crt
-        SSLCertificateKeyFile /etc/apache2/ssl/apache.key
-</VirtualHost>
-```
+	<Directory /var/www/owncloud>
+	        Options Indexes FollowSymLinks MultiViews
+	        AllowOverride All
+	        Order allow,deny
+	        allow from all
+	</Directory>
+	
+	<VirtualHost *:443>
+	        DocumentRoot /var/www/owncloud
+	        <Directory /var/www/owncloud>
+	                Options Indexes FollowSymLinks MultiViews
+	                AllowOverride All
+	                Order allow,deny
+	                allow from all
+	        </Directory>
+	        SSLEngine on
+	        SSLCertificateFile /etc/apache2/ssl/apache.crt
+	        SSLCertificateKeyFile /etc/apache2/ssl/apache.key
+	</VirtualHost>
 
 And that should be all we need in terms of our Dockerfile build framework to
 get our image created:
