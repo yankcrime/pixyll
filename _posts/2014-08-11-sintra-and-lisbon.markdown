@@ -16,10 +16,10 @@ indeed.
 But at least I took a few photos while we were out and about - would've been
 daft not to really...
 
-{% img https://farm6.staticflickr.com/5563/14877767802_f39ed6c9f6_b.jpg 1024 %}
-{% img https://farm4.staticflickr.com/3871/14875670994_b2c142d99a_b.jpg 1024 %}
-{% img https://farm4.staticflickr.com/3876/14875212461_21449afebf_b.jpg 1024 %}
-{% img https://farm4.staticflickr.com/3905/14875726804_0608bb6cd4_b.jpg 1024 %}
-{% img https://farm4.staticflickr.com/3876/14691540900_e142a8d647_b.jpg 1024 %}
+{% flickr_photo 14877767802 "Large" %}
+{% flickr_photo 14875670994 "Large" %}
+{% flickr_photo 14875212461 "Large" %}
+{% flickr_photo 14875726804 "Large" %}
+{% flickr_photo 14691540900 "Large" %}
 
 And there's a few more up here on [Flickr](https://www.flickr.com/photos/yankcrime/sets/72157645923925929/).

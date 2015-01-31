@@ -11,8 +11,8 @@ of the place up...) last night as part of 2014's [Salford Music Festival](http:/
 good to see these guys in a context other than their basement - a lot more
 people deserve to see them play live.
 
-{%img https://farm4.staticflickr.com/3873/15172982457_60640f41b4_h.jpg %}
-{%img https://farm4.staticflickr.com/3900/15336498446_f61baafe2c_h.jpg %}
-{%img https://farm4.staticflickr.com/3899/15172930258_a8a55ece2c_h.jpg %}
-{%img https://farm3.staticflickr.com/2944/15172811790_c2224ea00a_h.jpg %}
+{% flickr_photo 15172982457 "Large" %}
+{% flickr_photo 15336498446 "Large" %}
+{% flickr_photo 15172930258 "Large" %}
+{% flickr_photo 15172811790 "Large" %}
 

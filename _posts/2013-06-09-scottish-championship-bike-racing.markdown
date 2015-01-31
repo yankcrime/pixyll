@@ -8,13 +8,11 @@ categories: General Photography Motorsports
 
 {%img center http://farm8.staticflickr.com/7379/8999365250_2d211152cb_h.jpg %}
 
-<!-- more -->
-
-{% img center http://farm8.staticflickr.com/7358/8998178813_9a977da5c7_h.jpg %}
-{% img center http://farm4.staticflickr.com/3808/8998172997_d991ff56b4_h.jpg %}
-{% img center http://farm8.staticflickr.com/7460/8999373600_3ed4b6894f_h.jpg %}
-{% img center http://farm8.staticflickr.com/7339/8998189685_d57ac42bd4_h.jpg %}
-{% img center http://farm4.staticflickr.com/3819/8998182927_5a82303c90_h.jpg %}
+{% flickr_photo 8998178813 "Large" %}
+{% flickr_photo 8998172997 "Large" %}
+{% flickr_photo 8999373600 "Large" %}
+{% flickr_photo 8998189685 "Large" %}
+{% flickr_photo 8998182927 "Large" %}
 
 [More of the same over on Flickr](http://www.flickr.com/photos/yankcrime/sets/72157634031044506/).
 

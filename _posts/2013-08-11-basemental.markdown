@@ -16,10 +16,8 @@ sure to check the rest on
 Keep an ear (and an eye) out for these guys... They've got big plans, and
 rightfully so.
 
-<!-- more -->
-
-{% img center http://farm6.staticflickr.com/5486/9486732029_881fde719c_b.jpg %}
-{% img center http://farm8.staticflickr.com/7447/9489538220_a52e431eb8_b.jpg %}
-{% img center http://farm3.staticflickr.com/2846/9489531612_5c91c15111_b.jpg %}
-{% img center http://farm8.staticflickr.com/7302/9489547592_44c48d9772_b.jpg %}
+{% flickr_photo 9486732029 "Large" %}
+{% flickr_photo 9489538220 "Large" %}
+{% flickr_photo 9489531612 "Large" %}
+{% flickr_photo 9489547592 "Large" %}
 
