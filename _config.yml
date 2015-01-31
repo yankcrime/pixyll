@@ -34,7 +34,7 @@ flickr:
     api_key: 167cb17dcb886af997217243c8a6d1a3
 
 # Build settings
-markdown:     redcarpet
+markdown:     kramdown
 redcarpet:
   extensions: ['smart', 'tables', 'with_toc_data']
 permalink: /:year/:month/:day/:title
