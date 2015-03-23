@@ -538,21 +538,25 @@ strong, .bold {
 }
 
 .list {
+  font-family: inherit;
   padding-left: 2rem;
 }
 
 .list-simple {
   list-style: none;
   padding-left: 0;
+  font-family: inherit;
 }
 
 .list-inline {
   list-style: none;
   padding-left: 0;
+  font-family: inherit;
 }
 .list-inline li {
   display: inline;
   white-space: nowrap;
+  font-family: inherit;
 }
 
 .relative {
