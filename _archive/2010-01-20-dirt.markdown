@@ -1,0 +1,27 @@
+--- 
+layout: post
+title: Dirt
+date: 2010-1-20
+comments: true
+categories: General BMX
+link: false
+---
+
+{% img left http://dischord.org/misc/static/Jamie_Thomas1.jpg %}
+
+Back in around '96 / '97, myself and [Ben](http://www.aggroman.co.uk) used to
+update a little website that we named 'Dirt', with some reviews of BMX videos,
+music, and information on various 'scenes' around the UK.  The inspiration came
+mainly from [Kieran Chapman](http://www.keiranchapman.net) eWire e-zine, and
+while it was fun to do at the time we lost interest and it never received the
+number of updates it deserved.  Fast forward a few years and I notice that I
+seem to have lost all the versions I thought I had archived :(
+
+Fortunately, I've found the last version published up on the Wayback Machine
+and with the help of [Warrick](http://warrick.cs.odu.edu/) retrieved it complete
+and intact and put it [back online here](http://dischord.org/misc/dirt/).  It's
+pretty cringeworthy in places, from the design (made with NetObjects' Fusion
+2.x! through to our writing.  
+
+The photos were mainly stolen scans from [Dig Magazine](http://digbmx.com) although Will did kindly give us blessing to do so
+- or Big Brother, hence Jamie Thomas over there.  Good shit!
